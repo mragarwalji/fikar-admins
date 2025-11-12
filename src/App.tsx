@@ -7,8 +7,11 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/AdminSidebar";
 import Dashboard from "./pages/Dashboard";
 import Doctors from "./pages/Doctors";
+import DoctorDetail from "./pages/DoctorDetail";
 import Hospitals from "./pages/Hospitals";
+import HospitalDetail from "./pages/HospitalDetail";
 import Patients from "./pages/Patients";
+import PatientDetail from "./pages/PatientDetail";
 import Appointments from "./pages/Appointments";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
@@ -41,8 +44,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<AppLayout><Dashboard /></AppLayout>} />
           <Route path="/doctors" element={<AppLayout><Doctors /></AppLayout>} />
+          <Route path="/doctors/:id" element={<AppLayout><DoctorDetail /></AppLayout>} />
           <Route path="/hospitals" element={<AppLayout><Hospitals /></AppLayout>} />
+          <Route path="/hospitals/:id" element={<AppLayout><HospitalDetail /></AppLayout>} />
           <Route path="/patients" element={<AppLayout><Patients /></AppLayout>} />
+          <Route path="/patients/:id" element={<AppLayout><PatientDetail /></AppLayout>} />
           <Route path="/appointments" element={<AppLayout><Appointments /></AppLayout>} />
           <Route path="/settings" element={<AppLayout><Settings /></AppLayout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

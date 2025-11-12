@@ -49,8 +49,10 @@ const columns = [
   {
     key: "actions",
     label: "Actions",
-    render: () => (
-      <Button size="sm" variant="outline">View Details</Button>
+    render: (_: any, row: any) => (
+      <Button size="sm" variant="outline" onClick={() => window.location.href = `/hospitals/${row.id}`}>
+        View Details
+      </Button>
     )
   }
 ];
