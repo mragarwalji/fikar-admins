@@ -13,12 +13,12 @@ import {
 } from "@/components/ui/sidebar";
 
 const menuItems = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Doctors", url: "/doctors", icon: UserSquare2 },
-  { title: "Hospitals", url: "/hospitals", icon: Building2 },
-  { title: "Patients", url: "/patients", icon: Users },
-  { title: "Appointments", url: "/appointments", icon: Calendar },
-  { title: "Settings", url: "/settings", icon: Settings },
+  { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
+  { title: "Doctors", url: "/admin/doctors", icon: UserSquare2 },
+  { title: "Hospitals", url: "/admin/hospitals", icon: Building2 },
+  { title: "Patients", url: "/admin/patients", icon: Users },
+  { title: "Appointments", url: "/admin/appointments", icon: Calendar },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 
 export function AdminSidebar() {
@@ -44,7 +44,7 @@ export function AdminSidebar() {
                   <SidebarMenuButton asChild tooltip={item.title}>
                     <NavLink
                       to={item.url}
-                      end={item.url === "/"}
+                      end={item.url === "/admin"}
                       className="flex items-center gap-3 hover:bg-sidebar-accent transition-colors"
                       activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
                     >
