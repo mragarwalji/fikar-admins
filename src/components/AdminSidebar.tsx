@@ -1,5 +1,5 @@
 import { LayoutDashboard, Users, Building2, UserSquare2, Calendar, Settings } from "lucide-react";
-import { NavLink } from "@/components/NavLink";
+import { NavLink } from "@/components/Navigation/NavLink";
 import {
   Sidebar,
   SidebarContent,
