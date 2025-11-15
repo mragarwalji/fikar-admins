@@ -68,5 +68,25 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });
+console.log("Auth routes set up successfully.");
+// GET ADMIN INFO (name + email)
+router.get("/admin-info", async (req, res) => {
+  try {
+    // fetch first admin from collection
+    const admin = await AdminUser.findOne();
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin user not found" });
+    }
+
+    res.json({
+      name: admin.name,
+      email: admin.email,
+    });
+
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err });
+  }
+});
 
 module.exports = router; //  CommonJS export
