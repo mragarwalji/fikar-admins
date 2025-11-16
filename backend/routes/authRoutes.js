@@ -58,7 +58,7 @@ router.post("/login", async (req, res) => {
     //  Create JWT token
     const token = jwt.sign(
       { id: user._id, email: user.email },
-      "fikarplus_secret_key",
+      process.env.JWT_SECRET,
       { expiresIn: "2h" }
     );
 

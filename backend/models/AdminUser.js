@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const adminUserSchema = new mongoose.Schema({
+const adminUserSchema = new Schema({
   name: { type: String, required: true },
   age: { type: Number },
   gender: { type: String },

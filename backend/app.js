@@ -1,6 +1,7 @@
+require("dotenv").config(); 
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; 
 const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require("./routes/authRoutes");
@@ -9,38 +10,40 @@ const authRoutes = require("./routes/authRoutes");
 // middleware
 app.use(
   cors({
-    origin: ["http://localhost:8080", "https://fikar-admins.onrender.com", "https://fikar-admin.web.app"], // allow multiple origins
+    origin: [
+      "http://localhost:8080",
+      "https://fikar-admins.onrender.com",
+      "https://fikar-admin.web.app"
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-// Use your routes
+// Routes
 app.use("/api/auth", authRoutes);
 
+// MongoDB — from environment variable
+const uri = process.env.MONGO_URI;
 
-// MongoDB Fikar plus database connection
-const uri = "mongodb+srv://krishagarwal8962_db_user:0prSSZVqnROUrOoC@cluster0.0jvbowr.mongodb.net/fikarplus?retryWrites=true&w=majority&appName=Cluster0";
-
-
-// Connect to fikar plus mongodb database
+// Connect DB
 mongoose.connect(uri)
   .then(() => {
-    console.log("MongoDB Connected Successfully to FikarPlus Database")
-})
+    console.log("MongoDB Connected Successfully to FikarPlus Database");
+  })
   .catch((err) => {
-    console.error("MongoDB Connection Error:", err)
+    console.error("MongoDB Connection Error:", err);
+  });
+
+// Root Route
+app.get('/', (req, res) => {
+  res.send('Welcome to Fikar Plus Backend Server!');
 });
 
-app.get('/', (req, res) => {
-    res.send('Welcome to Fikar Plus Backend Server!');
-})
-
-
-// server running
+// Server Running
 app.listen(port, () => {
-    console.log(`Fikar Plus Server is running on http://localhost:${port}`);
+  console.log(`Fikar Plus Server is running on port ${port}`);
 });
