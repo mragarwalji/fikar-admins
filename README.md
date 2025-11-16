@@ -1,26 +1,83 @@
-# Welcome to your Lovable project
+# Welcome to Fikar Plus Admin project
 
-## Project info
+***🚀 Overview***
 
-**URL**: https://lovable.dev/projects/7e9f56c4-fc33-44bc-a116-dfdb1f84f00d
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/7e9f56c4-fc33-44bc-a116-dfdb1f84f00d) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
+Fikar Plus – Admin Panel is a complete hospital & appointment management web application.
+Admins can manage hospitals, doctors, patients, appointments, and even remove or block unwanted users.
+The system is built using a secure, scalable & modern full-stack architecture.
 Follow these steps:
+
+**Key Features**
+***🔐 Authentication & Security***
+. Secure Login & Signup
+. JWT-based authentication
+. Encrypted passwords using Bcrypt
+. Role-based admin access
+. Block/Unblock unwanted users
+. Remove/Delete users permanently
+. Suspicious users cannot login
+
+**🏥 Hospital Management**
+. Add, update, delete hospitals
+. Manage hospital availability
+. View hospital details
+
+**👨‍⚕️ Doctor Management**
+. Add new doctors
+. Edit/update doctor details
+. Delete unwanted doctors
+. Manage specialization & status
+. Auto-sync to MongoDB + Firestore
+
+**🧑‍🦰 Patient Management**
+. Add and update patient records
+. Delete unwanted or duplicate profiles
+. Block suspicious accounts
+
+**📅 Appointment Management**
+. Create and manage appointments
+. Approve / Reject request
+. Live status tracking
+. Real-time updates (Firestore)
+
+🛠️ Tech Stack
+# Frontend
+. React + TypeScript
+. Vite
+. Tailwind CSS
+. ShadCN UI
+. Axios for API integration
+
+# Backend
+. Node.js
+. Express.js
+. JWT Aunthetication
+. Bcrypt
+. CORS
+. Firebase Api
+
+# Database
+. MongoDB Cloud
+. Firebase Firestore
+
+**🔧 Environment Setup**
+***🛠 Backend .env***
+PORT=3000
+MONGO_URI=your_mongodb_cloud_url
+JWT_SECRET=your_secret_key
+FIREBASE_API_KEY=your_firebase_api_key
+FIREBASE_PROJECT_ID=your_project_id
+
+**🎨 Frontend .env**
+VITE_API_BASE_URL=http://localhost:3000
+VITE_FIREBASE_API_KEY=your_key
+VITE_FIREBASE_PROJECT_ID=your_id
+
+**🔌 API Endpoints**
+***🔐 Auth APIs*** 
+Method	     Endpoint	                 Description
+POST	       /api/auth/signup	         Register admin
+POST	      /api/auth/login	           Login admin
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
@@ -29,45 +86,16 @@ git clone <YOUR_GIT_URL>
 # Step 2: Navigate to the project directory.
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
+# Step 3: Initialize new project
+npm init -y
+
+# Install runtime dependencies
+npm install express mongoose bcryptjs jsonwebtoken cors -g nodemon
+
+# Install the necessary dependencies.
 npm i
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+i. npm run dev
+ii. nodemon server.js
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/7e9f56c4-fc33-44bc-a116-dfdb1f84f00d) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
