@@ -32,7 +32,7 @@ export function AdminSidebar() {
 
   // Fetch admin info from backend
   useEffect(() => {
-    fetch("http://localhost:3000/api/auth/admin-info")
+    fetch("https://fikar-admins.onrender.com/api/auth/admin-info")
       .then((res) => res.json())
       .then((data) => setAdmin(data))
       .catch((err) => console.log("Error:", err));

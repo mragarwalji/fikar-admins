@@ -9,7 +9,7 @@ const authRoutes = require("./routes/authRoutes");
 // middleware
 app.use(
   cors({
-    origin: "http://localhost:8080", // allow multiple origins
+    origin: ["http://localhost:8080", "https://fikar-admins.onrender.com", "https://fikar-admin.web.app"], // allow multiple origins
     methods: ["GET", "POST"],
     credentials: true,
   })

@@ -1,5 +1,16 @@
 {
   "projects": {
-    "default": "myfikarplus"
-  }
+    "default": "myfikarplus",
+    "admin": "myfikarplus"
+  },
+  "targets": {
+    "myfikarplus": {
+      "hosting": {
+        "admin": [
+          "fikar-admin"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
