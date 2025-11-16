@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });
-console.log("Auth routes set up successfully.");
+
 // GET ADMIN INFO (name + email)
 router.get("/admin-info", async (req, res) => {
   try {
