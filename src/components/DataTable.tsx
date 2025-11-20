@@ -22,13 +22,18 @@ interface DataTableProps {
 export function DataTable({ title, columns, data, searchable = true, searchPlaceholder = "Search..." }: DataTableProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredData = searchable
-    ? data.filter((row) =>
-        Object.values(row).some((value) =>
-          String(value).toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      )
-    : data;
+const filteredData = searchable
+  ? data.filter((row) =>
+      Object.values(row).some((value) => {
+        if (value === null || value === undefined) return false;
+        if (typeof value === "string" || typeof value === "number") {
+          return String(value).toLowerCase().includes(searchQuery.toLowerCase());
+        }
+        return false;
+      })
+    )
+  : data;
+
 
   return (
     <Card className="p-6">
