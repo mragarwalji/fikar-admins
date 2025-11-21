@@ -2,17 +2,35 @@ import { DataTable } from "@/components/DataTable";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone } from "lucide-react";
+import { db } from "@/firebase"; // Adjust import path as needed
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
-const patients = [
-  { id: 1, name: "John Smith", age: 45, gender: "Male", email: "john.s@email.com", phone: "+1 234-567-7001", doctor: "Dr. Sarah Johnson", lastVisit: "2025-01-10", condition: "Cardiac Issue", status: "Active" },
-  { id: 2, name: "Emma Davis", age: 32, gender: "Female", email: "emma.d@email.com", phone: "+1 234-567-7002", doctor: "Dr. Michael Chen", lastVisit: "2025-01-11", condition: "Migraine", status: "Active" },
-  { id: 3, name: "Robert Wilson", age: 58, gender: "Male", email: "robert.w@email.com", phone: "+1 234-567-7003", doctor: "Dr. Sarah Johnson", lastVisit: "2025-01-09", condition: "Hypertension", status: "Follow-up Required" },
-  { id: 4, name: "Lisa Anderson", age: 28, gender: "Female", email: "lisa.a@email.com", phone: "+1 234-567-7004", doctor: "Dr. James Brown", lastVisit: "2025-01-08", condition: "Knee Pain", status: "Active" },
-  { id: 5, name: "Michael Brown", age: 67, gender: "Male", email: "michael.b@email.com", phone: "+1 234-567-7005", doctor: "Dr. Emily Wilson", lastVisit: "2025-01-11", condition: "Routine Checkup", status: "Active" },
-  { id: 6, name: "Sarah Taylor", age: 41, gender: "Female", email: "sarah.t@email.com", phone: "+1 234-567-7006", doctor: "Dr. David Martinez", lastVisit: "2025-01-10", condition: "Skin Allergy", status: "Recovered" },
-];
+interface Patient {
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  email: string;
+  phone: string;
+  patientId: string;
+  // doctor: string;
+  // lastVisit: string;
+  // condition: string;
+  // status: string;
+}
 
 const columns = [
+   { 
+    key: "patientId", 
+    label: "Patients ID",
+    responsiveClass: "hidden lg:table-cell",
+    render: (value: string) => (
+      <div className="whitespace-nowrap text-xs font-mono">
+        {value.substring(0, 8)}...
+      </div>
+    )
+  },
   { key: "name", label: "Patient Name" },
   { 
     key: "age", 
@@ -35,20 +53,20 @@ const columns = [
       </div>
     )
   },
-  { key: "doctor", label: "Assigned Doctor" },
-  { key: "lastVisit", label: "Last Visit" },
-  { key: "condition", label: "Condition" },
-  { 
-    key: "status", 
-    label: "Status",
-    render: (value: string) => {
-      const variant = 
-        value === "Active" ? "bg-success text-success-foreground" :
-        value === "Recovered" ? "bg-info text-info-foreground" :
-        "bg-warning text-warning-foreground";
-      return <Badge className={variant}>{value}</Badge>;
-    }
-  },
+  // { key: "doctor", label: "Assigned Doctor" },
+  // { key: "lastVisit", label: "Last Visit" },
+  // { key: "condition", label: "Condition" },
+  // { 
+  //   key: "status", 
+  //   label: "Status",
+  //   render: (value: string) => {
+  //     const variant = 
+  //       value === "Active" ? "bg-success text-success-foreground" :
+  //       value === "Recovered" ? "bg-info text-info-foreground" :
+  //       "bg-warning text-warning-foreground";
+  //     return <Badge className={variant}>{value}</Badge>;
+  //   }
+  // },
   {
     key: "actions",
     label: "Actions",
@@ -61,6 +79,52 @@ const columns = [
 ];
 
 export default function Patients() {
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        const patientsData: Patient[] = [];
+        
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          patientsData.push({
+            id: doc.id,
+            name: data.name || "",
+            age: data.age || 0,
+            gender: data.gender || "",
+            email: data.email || "",
+            phone: data.phone || "",
+            patientId : data.uid || "",
+            // doctor: data.doctor || "",
+            // lastVisit: data.lastVisit || "",
+            // condition: data.condition || "",
+            // status: data.status || "Active"
+          });
+        });
+        
+        setPatients(patientsData);
+      } catch (error) {
+        console.error("Error fetching patients:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPatients();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-lg">Loading patients...</div>
+      </div>
+    );
+  }
+
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">

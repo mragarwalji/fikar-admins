@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LayoutDashboard, Users, Building2, UserSquare2, Calendar, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Building2, UserSquare2, Calendar, Settings, Badge } from "lucide-react";
 import { NavLink } from "@/components/Navigation/NavLink";
 
 import {
@@ -20,7 +20,7 @@ const menuItems = [
   { title: "Doctors", url: "/admin/doctors", icon: UserSquare2 },
   { title: "Hospitals", url: "/admin/hospitals", icon: Building2 },
   { title: "Patients", url: "/admin/patients", icon: Users },
-  { title: "Appointments", url: "/admin/appointments", icon: Calendar },
+  { title: "Appointments", url: "/admin/appointments", icon: Calendar},
   { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 

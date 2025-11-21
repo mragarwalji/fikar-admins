@@ -5,6 +5,7 @@ import { Mail, Phone } from "lucide-react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '@/firebase';
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Doctor {
   id: string;
@@ -116,13 +117,12 @@ const columns = [
       );
     }
   },
-  {
+ {
     key: "actions",
     label: "Actions",
-    responsiveClass: "",
     render: (_: any, row: any) => (
-      <Button size="sm" variant="outline" className="text-xs whitespace-nowrap">
-        View
+      <Button size="sm" variant="outline" onClick={() => window.location.href = `/doctors/${row.id}`}>
+        View Details
       </Button>
     )
   }
@@ -305,9 +305,11 @@ export default function Doctors() {
                       <span>ID: {doctor.doctorId.substring(0, 6)}...</span>
                       <span>Patients: {doctor.patients}</span>
                     </div>
+                    <Link to = {`./doctors/${doctor.id}`}>
                     <Button size="sm" variant="outline" className="text-xs whitespace-nowrap border-gray-300">
                       View Details
                     </Button>
+                    </Link>
                   </div>
                 </div>
               ))}
